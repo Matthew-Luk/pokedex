@@ -1,23 +1,15 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Main from './Components/Main';
+import Text from './Components/Text';
 
 function App() {
+  const [searchPokemon, setSearchPokemon] = useState("")
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Main searchPokemon={searchPokemon} setSearchPokemon={setSearchPokemon}/>
+      <Text searchPokemon={searchPokemon} setSearchPokemon={setSearchPokemon}/>
     </div>
   );
 }
