@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App">
-      <Main searchPokemon={searchPokemon} setSearchPokemon={setSearchPokemon}/>
+      <Main searchPokemon={searchPokemon}/>
       <Text searchPokemon={searchPokemon} setSearchPokemon={setSearchPokemon}/>
     </div>
   );

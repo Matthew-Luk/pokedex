@@ -3,15 +3,34 @@ import axios from 'axios'
 import '../SCSS/styles.scss'
 
 const Main = (props) => {
-  const {searchPokemon, setSearchPokemon} = props
-  const [pokemonImage, setPokemonImage] = useState("")
+  const {searchPokemon} = props
+  const [pokemon, setPokemon] = useState({})
+
+  const capitalize = (e) => {
+    if(e !== undefined){
+      return e[0].toUpperCase() + e.slice(1)
+    }
+  }
+
+  const loop = (e) => {
+    let arr = []
+    arr.push(capitalize(e[0].type.name))
+    if(e.length === 2){
+      arr.push(capitalize(e[1].type.name))
+    }
+    return arr.join(" & ")
+  }
 
   useEffect(() => {
     axios.get(`https://pokeapi.co/api/v2/pokemon/${searchPokemon}/`)
     .then((result) => {
       console.log(result.data)
-      setPokemonImage(result.data.sprites.front_default)
-      console.log(pokemonImage)
+      setPokemon({
+        image: result.data.sprites.front_default,
+        name: result.data.name,
+        id: result.data.id,
+        type: loop(result.data.types)
+      })
     })
     .catch((error) => {
       console.log(error)
@@ -32,7 +51,7 @@ const Main = (props) => {
                 <p className='redButton1'></p>
               </div>
               <div className='screen1'>
-                {pokemonImage ? <img src={pokemonImage} alt="pokemon that was searched" /> : ""}
+                {pokemon.image ? <img src={pokemon.image} alt="pokemon that was searched" /> : ""}
               </div>
               <div className='screenButtonBottom'>
                 <p className='redButton2'></p>
@@ -57,8 +76,8 @@ const Main = (props) => {
         </div>
         <div className='rightMiddle'>
           <div className='screen2'>
-            <p></p>
-            <p></p>
+            <p>{capitalize(pokemon.name)} {`#${pokemon.id}`}</p>
+            <p>{pokemon.type ? `${pokemon.type}` : ""}</p>
           </div>
           <div className='buttonRow'>
 

@@ -3,6 +3,7 @@ $primary-color: black;
 $secondary-color: #d3093e;
 $shadow-color: #95082e;
 $primary-border: 0.1rem solid black;
+$primary-font: "Press Start 2P";
 
 
 .main {
@@ -102,11 +103,18 @@ $primary-border: 0.1rem solid black;
       flex-direction: column;
       justify-content: center;
       gap: 1.2rem;
+      font-family: $primary-font;
+      color: white;
       .screen2 {
         background-color: #074235;
         height: 12rem;
         width: 30rem;
         border-radius: 0.8rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.2rem;
       }
       .buttonRow {
         background-color: #22c4e8;
@@ -122,11 +130,11 @@ $primary-border: 0.1rem solid black;
 }
 
 .text {
-  font-family: "Press Start 2P";
+  font-family: $primary-font;
   width: 60rem;
   height: 20rem;
-  background-color: yellow;
   display: flex;
+  border: 0.2rem solid black;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -149,7 +157,6 @@ $primary-border: 0.1rem solid black;
     overflow: hidden;
   }
 }
-
 
 
 .redButton1 {
