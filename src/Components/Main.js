@@ -1,25 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import '../SCSS/styles.scss'
+import {loop, capitalize} from './Functions'
 
 const Main = (props) => {
   const {searchPokemon} = props
   const [pokemon, setPokemon] = useState({})
-
-  const capitalize = (e) => {
-    if(e !== undefined){
-      return e[0].toUpperCase() + e.slice(1)
-    }
-  }
-
-  const loop = (e) => {
-    let arr = []
-    arr.push(capitalize(e[0].type.name))
-    if(e.length === 2){
-      arr.push(capitalize(e[1].type.name))
-    }
-    return arr.join(" & ")
-  }
 
   useEffect(() => {
     axios.get(`https://pokeapi.co/api/v2/pokemon/${searchPokemon}/`)
@@ -27,9 +13,10 @@ const Main = (props) => {
       console.log(result.data)
       setPokemon({
         image: result.data.sprites.front_default,
-        name: result.data.name,
+        name: capitalize(result.data.name),
         id: result.data.id,
-        type: loop(result.data.types)
+        type: loop(result.data.types),
+        audio: result.data.cries.latest
       })
     })
     .catch((error) => {
@@ -76,11 +63,18 @@ const Main = (props) => {
         </div>
         <div className='rightMiddle'>
           <div className='screen2'>
-            <p>{capitalize(pokemon.name)} {`#${pokemon.id}`}</p>
+            <p>{pokemon.name? `${pokemon.name} #${pokemon.id}` : ""}</p>
             <p>{pokemon.type ? `${pokemon.type}` : ""}</p>
           </div>
           <div className='buttonRow'>
-
+            <button style={{borderTopLeftRadius:" 0.8rem"}}><audio src={`${pokemon.audio}`}> button 1 </audio> </button>
+            <button>button 2</button>
+            <button>button 3</button>
+            <button style={{borderTopRightRadius:" 0.8rem"}}>button 4</button>
+            <button style={{borderBottomLeftRadius:" 0.8rem"}}>button 5</button>
+            <button>button 6</button>
+            <button>button 7</button>
+            <button style={{borderBottomRightRadius:" 0.8rem"}}>button 8</button>
           </div>
         </div>
         <div className='rightBottom'>

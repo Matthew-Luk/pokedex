@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import '../SCSS/styles.scss'
-import axios from 'axios'
+import { TbPokeball } from "react-icons/tb";
 
 const Text = (props) => {
   const {searchPokemon, setSearchPokemon} = props
@@ -18,11 +18,16 @@ const Text = (props) => {
 
   return (
     <div className='text'>
-      <p>What Pokémon did you want to search for?</p>
-      <form onSubmit={search}>
-        <input type="text" placeholder='Search' onChange={changeInput} value={textInput}/>
-        <button type='submit'>Search</button>
-      </form>
+      <TbPokeball style={{position: "absolute", left: "0", top: "0"}} size={"2.4rem"}/>
+      <TbPokeball style={{position: "absolute", right: "0", top: "0"}} size={"2.4rem"}/>
+      <div className='textWrapper'>
+        <p>What Pokémon did you want to search for?</p>
+        <form onSubmit={search}>
+          <input type="text" onChange={changeInput} value={textInput}/>
+        </form>
+      </div>
+      <TbPokeball style={{position: "absolute", left: "0", bottom: "0"}} size={"2.4rem"}/>
+      <TbPokeball style={{position: "absolute", right: "0", bottom: "0"}} size={"2.4rem"}/>
     </div>
   )
 }

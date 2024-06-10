@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;500;700&family=Montserrat:wght@500;700&family=Press+Start+2P&family=Roboto:wght@100;300;400;500;700;900&family=Rubik:wght@400;500;600;700&family=Titillium+Web:wght@600&display=swap');
+$primary-color: black;
+$secondary-color: #d3093e;
+$shadow-color: #95082e;
+$primary-border: 0.1rem solid black;
+$primary-font: "Press Start 2P";
+
+.mobileMain {
+  background-color: $secondary-color;
+  width: 100vw;
+  height: 100vh;
+  font-size: 1rem;
+  font-family: $primary-font;
+  .mobileHeader {
+    .title {
+      display: flex;
+      align-items: center;
+      color: white;
+      gap: 1.2rem;
+    }
+  }
+}

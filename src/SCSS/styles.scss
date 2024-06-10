@@ -5,7 +5,6 @@ $shadow-color: #95082e;
 $primary-border: 0.1rem solid black;
 $primary-font: "Press Start 2P";
 
-
 .main {
   border: $primary-border;
   height: 60rem;
@@ -107,6 +106,7 @@ $primary-font: "Press Start 2P";
       color: white;
       .screen2 {
         background-color: #074235;
+        border: 0.2rem solid black;
         height: 12rem;
         width: 30rem;
         border-radius: 0.8rem;
@@ -117,10 +117,18 @@ $primary-font: "Press Start 2P";
         gap: 1.2rem;
       }
       .buttonRow {
-        background-color: #22c4e8;
+        border: 0.1rem solid black;
+        border-radius: 0.8rem;
         height: 10rem;
         width: 30rem;
-        border-radius: 0.8rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        button {
+          background-color: #22c4e8;
+          border: 0.1rem solid black;
+          cursor: pointer;
+        }
       }
     }
     .rightBottom {
@@ -130,31 +138,51 @@ $primary-font: "Press Start 2P";
 }
 
 .text {
-  font-family: $primary-font;
-  width: 60rem;
-  height: 20rem;
-  display: flex;
-  border: 0.2rem solid black;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  clip-path: polygon(
-    0% 10%,
-    5% 0%,
-    95% 0%,
-    100% 10%,
-    100% 90%,
-    95% 100%,
-    5% 100%,
-    0% 90%
-  );
-  p {
+  padding: 0.5rem;
+  border: 0.1rem solid black;
+  position: relative;
+  .textWrapper {
+    font-family: $primary-font;
+    width: 60rem;
+    height: 20rem;
     display: flex;
+    border: 0.2rem solid black;
+    flex-direction: column;
     justify-content: center;
-    animation: type 4s steps(60, end);
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
+    gap: 1.2rem;
+    clip-path: polygon(
+      0% 10%,
+      3% 0%,
+      97% 0%,
+      100% 10%,
+      100% 90%,
+      97% 100%,
+      3% 100%,
+      0% 90%
+    );
+    p {
+      overflow: hidden;
+      white-space: nowrap; 
+      margin: 0 auto;
+      // border-right: 0.5rem solid black;
+      letter-spacing: .15em; 
+      animation: 
+        type 3.5s steps(50, end),
+        blink .75s step-end infinite;
+    }
+    form {
+      margin: 0 7rem;
+      input {
+        border: none;
+        font-family: $primary-font;
+        caret-shape: block;
+        font-size: 1rem;
+        height: 1.6rem;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
   }
 }
 
@@ -188,4 +216,10 @@ $primary-font: "Press Start 2P";
 
 @keyframes type {
   from {width: 0;}
+  to {width: 78%;}
+}
+
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: black; }
 }
