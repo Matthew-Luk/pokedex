@@ -3,7 +3,7 @@ import '../SCSS/styles.scss'
 import { TbPokeball } from "react-icons/tb";
 
 const Text = (props) => {
-  const {searchPokemon, setSearchPokemon} = props
+  const {setSearchPokemon} = props
   const [textInput, setTextInput] = useState("")
 
   const search = (e) => {

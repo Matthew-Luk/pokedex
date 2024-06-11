@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import '../SCSS/styles.scss'
-import {loop, capitalize} from './Functions'
+import {loopTypes, capitalize} from './Functions'
 
 const Main = (props) => {
   const {searchPokemon} = props
@@ -15,7 +15,7 @@ const Main = (props) => {
         image: result.data.sprites.front_default,
         name: capitalize(result.data.name),
         id: result.data.id,
-        type: loop(result.data.types),
+        type: loopTypes(result.data.types),
         audio: result.data.cries.latest
       })
     })
