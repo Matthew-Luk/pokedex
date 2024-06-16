@@ -43,16 +43,16 @@ const Mobile = (props) => {
         </form>
       </div>
       <div className='mobileContent'>
-        {
-          pokemonList.map((item, index) => (
-            <div className='pokemonCard' onClick={() => view(index+1)} key={index}>
-              <p className='pokemonId'>#{index+1}</p>
-              {/* <img className='pokemonImg' src={`https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/dream-world/${index+1}.svg`} alt="pokemon"/> */}
-              <img className='pokemonImg' src={`https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/official-artwork/${index+1}.png`} alt="pokemon"/>
-              <p className='pokemonName'>{item}</p>
-            </div>
-          ))
-        }
+          {
+            pokemonList.map((item, index) => (
+              <div className='pokemonCard' onClick={() => view(index+1)} key={index}>
+                <p className='pokemonId'>#{index+1}</p>
+                {/* <img className='pokemonImg' src={`https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/dream-world/${index+1}.svg`} alt="pokemon"/> */}
+                <img className='pokemonImg' src={`https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/official-artwork/${index+1}.png`} alt="pokemon"/>
+                <p className='pokemonName'>{item}</p>
+              </div>
+            ))
+          }
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { capitalize, colorType, loopStats, loopTypes } from './Functions'
+import { capitalize, colorType, loopStats, loopTypes, loopAbilities } from './Functions'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import { IoHomeOutline } from "react-icons/io5";
@@ -8,6 +8,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { TbWeight } from "react-icons/tb";
 import { VscSymbolRuler } from "react-icons/vsc";
 import { IoMoveSharp } from "react-icons/io5";
+import { IoIosStats } from "react-icons/io";
 
 const SingleView = (props) => {
   const [pokemon, setPokemon] = useState({})
@@ -48,31 +49,12 @@ const SingleView = (props) => {
         name: capitalize(result.data.name),
         id: result.data.id,
         types: loopTypes(result.data.types), 
-        // type1: result.data.types[0].type.name,
         weight: result.data.weight,
         height: result.data.height,
-        stats: loopStats(result.data.stats)
+        color: colorType(result.data.types[0].type.name),
+        stats: loopStats(result.data.stats),
+        moves: loopAbilities(result.data.abilities)
       })
-      // if(result.data.types.length === 2){
-      //   setPokemon({
-      //     image: `https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`,
-      //     // image: result.data.sprites.other.showdown.front_default,
-      //     name: capitalize(result.data.name),
-      //     id: result.data.id,
-      //     type1: result.data.types[0].type.name,
-      //     type2: result.data.types[1].type.name,
-      //     weight: result.data.weight,
-      //     height: result.data.height,
-      //     stats: loopStats(result.data.stats)
-      //     // hp: result.data.stats[0],
-      //     // attack: result.data.stats[1],
-      //     // defense: result.data.stats[2],
-      //     // specialAttack: result.data.stats[3],
-      //     // specialDefense: result.data.stats[4],
-      //     // speed: result.data.stats[5],
-      //     // moves:
-      //   })
-      // }
     })
     .catch((error) => {
       console.log(error)
@@ -80,7 +62,7 @@ const SingleView = (props) => {
   },[pokemonId])
 
   return (
-    <div className='singleViewPage' style={{backgroundColor: `${pokemon.types? `${colorType(pokemon.types[0])}` : ""}`}}>
+    <div className='singleViewPage' style={{backgroundColor: `${pokemon.color}`}}>
       <div className='singleViewContent'>
         <div className='singleViewTitle'>
           <IoHomeOutline size={"2.4rem"} color='white' onClick={home} cursor={"pointer"}/>
@@ -93,19 +75,18 @@ const SingleView = (props) => {
         </div>
         <div className='singleViewCard'>
           <div className='types'>
-            {/* <p style={{backgroundColor: `${colorType(pokemon.type1)}`}}>{pokemon.type1}</p>
-            {pokemon.type2 ? <p style={{backgroundColor: `${colorType(pokemon.type2)}`}}>{pokemon.type2}</p> : ""} */}
             {
-              pokemon.types ?
+              pokemon.types 
+              ?
               pokemon.types.map((item, index) => (
                 <p key={index} style={{backgroundColor: `${colorType(item)}`}}>{item}</p>
-              )):
+              ))
+              :
               ""
             }
           </div>
-          <strong>About</strong>
           <div className='aboutSection'>
-            <div className='aboutCategory'>
+            <div className='aboutCategory breakline'>
               <p>{pokemon.weight / 10} kg</p>
               <div className='aboutDescriptor'>
                 <TbWeight />
@@ -119,23 +100,39 @@ const SingleView = (props) => {
                 <p>Height</p>
               </div>
             </div>
-            <div className='aboutCategory'>
+          </div>
+          <div className='abilities'>
+            <div className='moveList'>
+              <div className='moves'>
+                {
+                  pokemon.moves
+                  ?
+                  pokemon.moves.map((item, index) => (
+                    <p key={index}>{item}</p>
+                  ))
+                  :
+                  ""
+                }
+              </div>
               <div className='aboutDescriptor'>
                 <IoMoveSharp />
                 <p>Moves</p>
               </div>
             </div>
           </div>
-          <strong>Base Stats</strong>
           <div className='baseStats'>
+            <div className='aboutDescriptor mb12'>
+              <IoIosStats size={"1.6rem"}/>
+              <strong>Base Stats</strong>
+            </div>
             {
-              pokemon.stats ?
+              pokemon.stats
+              ?
               pokemon.stats.map((item, index) => (
-                <div className='stat' key={index} style={{color: `${colorType(pokemon.types[0])}`}}>
-                  <p className='statLeft' style={{borderRight: `0.1rem solid ${colorType(pokemon.types[0])}`}}>{item}</p>
-                  <div className='statBar' style={{backgroundColor: `${colorType(pokemon.types[0])}`}}>
-                    <div className='percentBar' style={{width: `${parseInt(item[1]) > 100 ? "100%" : `${parseInt(item[1])}%`}`}}>
-                    </div>
+                <div key={index} className='stat' style={{color: `${pokemon.color}`}}>
+                  <p className='statLeft' style={{borderRight: `0.1rem solid ${pokemon.color}`}}>{item}</p>
+                  <div className='statBar' style={{backgroundColor: `${pokemon.types[1] ? `${colorType(pokemon.types[1])}` : "#E5E4E2"}`}}>
+                    <div className='percentBar' style={{backgroundColor: `${pokemon.color}`, width: `${parseInt(item[1]) > 100 ? "100%" : `${parseInt(item[1])}%`}`}}></div>
                   </div>
                 </div>
               ))
