@@ -4,6 +4,7 @@ export function loopTypes(e){
   if(e.length === 2){
     arr.push(e[1].type.name)
   }
+  console.log(arr)
   return arr
 }
 
@@ -11,6 +12,14 @@ export function loopPokemon(e){
   let arr = []
   for(let i of e.results){
     arr.push(i.name)
+  }
+  return arr
+}
+
+export function loopStats(e){
+  let arr = [["HP "],["ATK "],["DEF "],["Sp.ATK "],["Sp.DEF "],["SPD "]]
+  for(let i = 0; i < e.length; i++){
+    arr[i].push(e[i].base_stat)
   }
   return arr
 }

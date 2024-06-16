@@ -100,5 +100,111 @@ $primary-font: "Press Start 2P";
 .singleViewPage {
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .singleViewContent {
+    height: 65rem;
+    width: 40rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    .singleViewTitle {
+      display: flex;
+      align-items: center;
+      font-size: 1.6rem;
+      font-family: $primary-font;
+      gap: 1.2rem;
+      color: white;
+    }
+    .imageBlock {
+      z-index: 1;
+      img {
+        // still image
+        height: 18rem;
+        // gif
+        max-width: 25rem;
+        margin-bottom: -5rem;
+      }
+    }
+    .singleViewCard {
+      padding-top: 6rem;
+      height: 55rem;
+      width: 100%;
+      background-color: #fff;
+      border-radius: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .types {
+        display: flex;
+        gap: 1.2rem;
+        p {
+          width: 8rem;
+          height: 2.4rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 2rem;
+          font-weight: 800;
+          color: white;
+        }
+      }
+      strong {
+        font-size: 1.2rem;
+      }
+      .aboutSection {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        height: 8.4rem;
+        width: 100%;
+        .aboutCategory {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 1.2rem;
+          font-size: 1.2rem;
+          .aboutDescriptor {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+          }
+        }
+      }
+      .baseStats {
+        display: flex;
+        flex-direction: column;
+        gap: 2.4rem;
+        width: 100%;
+        .stat {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          .statLeft {
+            flex: 1.5;
+            display: flex;
+            gap: 0.4rem;
+            width: 100%;
+            justify-content: flex-end;
+            padding-right: 0.4rem;
+            align-items: center;
+            height: 100%;
+          }
+          .statBar {
+            flex: 8;
+            width: 100%;
+            height: 2rem;
+            margin: 0 1.2rem;
+            .percentBar {
+              background-color: black;
+              height: 2rem;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 

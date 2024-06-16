@@ -22,7 +22,6 @@ const Mobile = (props) => {
 
   useEffect(() => {
     axios.get("https://pokeapi.co/api/v2/pokemon/?limit=1025")
-    // axios.get("https://pokeapi.co/api/v2/pokemon/?limit=20")
     .then((result) => {
       setPokemonList(loopPokemon(result.data))
     })
