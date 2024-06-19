@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { capitalize, colorType, loopStats, loopTypes, loopAbilities } from './Functions'
+import { capitalize, colorType, loopStats, loopTypes, loopAbilities, getIdFromURL } from './Functions'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import { IoHomeOutline } from "react-icons/io5";
@@ -14,6 +14,7 @@ const SingleView = (props) => {
   const [pokemon, setPokemon] = useState({})
   const {pokemonId, setPokemonId} = props
   const navigate = useNavigate()
+  const [url, setUrl] = useState("")
 
   const home = () => {
     navigate('/')
@@ -39,13 +40,17 @@ const SingleView = (props) => {
     }
   }
 
+  
   useEffect(() => {
+    setUrl(window.location.href)
+    if(pokemonId === 0 || pokemonId !== getIdFromURL(window.location.href)){
+      setPokemonId(getIdFromURL(window.location.href))
+    }
     axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`)
     .then((result) => {
       console.log(result.data)
       setPokemon({
         image: `https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`,
-        // image: result.data.sprites.other.showdown.front_default,
         name: capitalize(result.data.name),
         id: result.data.id,
         types: loopTypes(result.data.types), 
@@ -53,13 +58,13 @@ const SingleView = (props) => {
         height: result.data.height,
         color: colorType(result.data.types[0].type.name),
         stats: loopStats(result.data.stats),
-        moves: loopAbilities(result.data.abilities)
+        abilities: loopAbilities(result.data.abilities)
       })
     })
     .catch((error) => {
       console.log(error)
     })
-  },[pokemonId])
+  },[pokemonId, setPokemonId, url])
 
   return (
     <div className='singleViewPage' style={{backgroundColor: `${pokemon.color}`}}>
@@ -102,12 +107,12 @@ const SingleView = (props) => {
             </div>
           </div>
           <div className='abilities'>
-            <div className='moveList'>
-              <div className='moves'>
+            <div className='abilitiesList'>
+              <div className='abilities'>
                 {
-                  pokemon.moves
+                  pokemon.abilities
                   ?
-                  pokemon.moves.map((item, index) => (
+                  pokemon.abilities.map((item, index) => (
                     <p key={index}>{item}</p>
                   ))
                   :
@@ -116,7 +121,7 @@ const SingleView = (props) => {
               </div>
               <div className='aboutDescriptor'>
                 <IoMoveSharp />
-                <p>Moves</p>
+                <p>Abilities</p>
               </div>
             </div>
           </div>
