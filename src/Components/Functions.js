@@ -12,7 +12,7 @@ export function loopPokemon(e, pre){
   if(pre === ""){
     return names
   }else{
-    const newArr = names.filter(names => names[1].startsWith(pre) || (names[0]).toString().startsWith(pre))
+    const newArr = names.filter(names => names[1].includes(pre) || (names[0]).toString().includes(pre))
     console.log(newArr)
     return newArr
   }

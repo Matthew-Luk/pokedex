@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import '../SCSS/mobile.scss'
 import { TbPokeball } from "react-icons/tb";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 import {loopPokemon, getTypes, colorType, loopPokemon2} from './Functions'
 
 const Mobile = (props) => {
@@ -16,9 +17,23 @@ const Mobile = (props) => {
     setSearchPokemon(e.target.value)
   }
 
+  const search2 = (e) => {
+    e.preventDefault()
+    setSearchPokemon(e.target[0].value)
+    console.log(pokemonList)
+  }
+
   const view = (e) => {
     setPokemonId(e)
     navigate(`/${e}`)
+  }
+
+  const reload = () => {
+    window.location.reload()
+  }
+
+  const scrollToTop = () => {
+    window.scrollTo({top:-100, behavior: "smooth"})
   }
 
   useEffect(() => {
@@ -36,11 +51,15 @@ const Mobile = (props) => {
     <div className='mobileMain'>
       <div className='mobileHeader'>
         <div className='title'>
-          <TbPokeball size={"4.8rem"} color='white'/>
+          <TbPokeball size={"4.8rem"} color='white' onClick={reload} cursor={"pointer"}/>
           <p>Matthew's Pokédex</p>
         </div>
-        <form onSubmit={search}>
+        <form className='desktopSearch'>
           <input className='input' type="text" placeholder='Search' onChange={search}/>
+        </form>
+        <form className='mobileSearch' onSubmit={search2}>
+          <input className='input' type="text" placeholder='Search'/>
+          <button><FaMagnifyingGlass color='#d3093e'/></button>
         </form>
       </div>
       <div className='mobileContent'>
